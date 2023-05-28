@@ -19,20 +19,37 @@ function bienvenidos() {
         }
 }
 
-function comprarProductos(){
-    productos = prompt(
-        "Elija uno de nuestros productos: \n 1: Tabla de fiambre chica \n 2: Tabla de fiambre mediana \n 3: Tabla de fiambre grande"
-    );
-    if (productos === "1"){
-        alert("La tabla de fiambres chica es para 2 a 3 personas y tiene un monto final de " + tablaChica * 1.21)
-    }
-    if (productos === "2"){
-        alert("La tabla de fiambres mediana es para 4 a 6 personas y tiene un monto final de " + tablaMediana * 1.21)
-    }
-    if (productos === "3"){
-        alert("La tabla de fiambres grande es para 8 a 10 personas y tiene un monto final de " + tablaGrande * 1.21)
-    }
+function Productos (nombre, precio){
+    this.nombre = nombre;
+    this.precio = precio;
 }
+
+let producto = [
+    {nombre: "Aceite 10 40 Valvolin", precio: "2500"},
+    {nombre: "Aceite 10 40 Motul", precio: "3500"},
+    {nombre: "Aceite 10 40 Elaion", precio: "2800"},
+    {nombre: "Agua Destilada", precio: "800"},
+]
+
+function agregarAlCarrito(){
+    const producto2 = new Productos (nombre, precio)
+    const producto3 = new Productos (nombre, precio)
+    arrayCarrito.push(producto2)
+    arrayCarrito.push(producto3)
+    alert("Producto añadido al carrito")
+}
+
+function carrito(){
+    arrayCarrito.forEach((elemento) =>{
+        console.log (`Usted eligio ${elemento.nombre} por un valor de ${elemento.precio}`)
+    })
+}
+
+function valores(){
+    const valor = producto.filter ((aceite) => aceite.precio < 3000) 
+}
+
+
 
 function trabajaConNosotros(){
     alert("Para trabajar con nosotros, podes enviarnos tu CV, en formato PDF, a nuestro WhatsApp: 11-5949-9268 o acercarlo presencial a nuestro local ubicado en: Los Andes 1210, Ingeniero Maschwitz")
@@ -43,26 +60,30 @@ function preguntasFrecuentes(){
 }
 
 /*Variables Globales*/
-let productos;
+
 bienvenidos();
-let tablaChica = 5000;
-let tablaMediana = 6000;
-let tablaGrande = 7000;
-let opcion = prompt("Ingrese la opción deseada: \n 1: Comprar productos \n 2: Trabajar con nosotros \n 3: Preguntas frecuentes \n 4: Terminar")
+let arrayCarrito = []
+
+let opcion = prompt ("Ingrese una opción: \n 1: Cargar productos \n 2: Ver carrito \n 3: Filtro de precios \n 4: Trabaja con Nosotros \n 5: Preguntas Frecuentes \n 6: Salir")
 
 /*Bucle*/
-while(opcion !=="4"){
+while(opcion !=="6"){
     if (opcion === "1"){
-        comprarProductos()
-        opcion = "4"
+        agregarAlCarrito(arrayCarrito)
     }
     if (opcion === "2"){
-        trabajaConNosotros()
-        opcion = "4"
+        carrito(arrayCarrito)
     }
     if (opcion === "3"){
+        valores()
+    }
+    if (opcion === "4"){
+        trabajaConNosotros()
+        opcion = "6"
+    }
+    if (opcion === "5"){
         preguntasFrecuentes()
-        opcion = "4"
+        opcion = "6"
     }
 }
 
